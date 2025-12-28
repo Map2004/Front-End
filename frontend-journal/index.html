@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Front-End</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <h1>Front-End</h1>
+        <p>บันทึกพัฒนาการเขียนเว็บ</p>
+    </header>
+
+    <main>
+        <section class="input-box">
+            <h2>เพิ่มบันทึก</h2>
+            <input type="text" id="title" placeholder="หัวข้อวันนี้" />
+            <textarea id="content" placeholder="วันนี้เรียนอะไร / เข้าใจอะไร / ติดตรงไหน"></textarea>
+            <button onclick="addLog()">บันทึก</button>
+        </section>
+
+        <section class="logs">
+            <h2>บันทึกทั้งหมด</h2>
+            <div id="loglist"></div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
