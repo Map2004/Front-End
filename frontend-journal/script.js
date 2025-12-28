@@ -1,42 +1,45 @@
-const logList = document.getElementById("logList");
+window.onload = function () {
+  const logList = document.getElementById("logList");
 
-window.onload = () => {
-    const logs = JSON.parse(localStorage.getItem("logs")) || [];
-    logs.forEach(log => createLog(log.title, log.content, log.date));
-};
-
-function addLog() {
+  window.addLog = function () {
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
 
     if (!title || !content) {
-        alert("กรุณากรอกให้ครบ");
-        return;
+      alert("กรอกข้อมูลให้ครบ");
+      return;
     }
 
-    const date = new Date().toISOString();
-    const logdata = { title, content, date};
+    const log = {
+      title,
+      content,
+      date: new Date().toLocaleString()
+    };
 
-    createLog(title, content, date);
-    saveLog(logData);
-
-    document.getElementById("title").value = "";
-    document.getElementById("content").value = "";
-}
-
-function createLog(title, content, date) {
-    const div = document.createElement("div");
-    div.className = "log";
-
-    div.innerHTML = `
-    <h3>${title}</h3>
-    <small>${date}</small>
-    <p>${content}</p>
-    `;
-}
-
-function saveLog(log) {
     const logs = JSON.parse(localStorage.getItem("logs")) || [];
     logs.unshift(log);
     localStorage.setItem("logs", JSON.stringify(logs));
-}
+
+    renderLogs();
+    document.getElementById("title").value = "";
+    document.getElementById("content").value = "";
+  };
+
+  function renderLogs() {
+    logList.innerHTML = "";
+    const logs = JSON.parse(localStorage.getItem("logs")) || [];
+
+    logs.forEach(log => {
+      const div = document.createElement("div");
+      div.className = "log";
+      div.innerHTML = `
+        <h3>${log.title}</h3>
+        <small>${log.date}</small>
+        <p>${log.content}</p>
+      `;
+      logList.appendChild(div);
+    });
+  }
+
+  renderLogs();
+};
